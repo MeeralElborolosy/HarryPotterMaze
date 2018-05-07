@@ -1,8 +1,8 @@
 package model;
 
-public abstract class Wall implements Cell{
+public abstract class Bomb implements Cell{
 	private String type;
-	public abstract void breakWall();
+	public abstract void BombPlayer();
 	public String getType()
 	{
 		return type;

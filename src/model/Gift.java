@@ -1,8 +1,8 @@
 package model;
 
-public abstract class Wall implements Cell{
+public abstract class Gift implements Cell{
 	private String type;
-	public abstract void breakWall();
+	public abstract void gainGift();
 	public String getType()
 	{
 		return type;

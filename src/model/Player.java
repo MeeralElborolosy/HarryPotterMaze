@@ -1,32 +1,34 @@
 package model;
 
-public class Player {
-	Player player=new Player();
-	int health;
-	int bullets;
-	int armour;
+public class Player implements Cell{
+	private static Player player=new Player();
+	private int health;
+	private int bullets;
+	private int armor;
+	private String type;
 	private Player()
 	{
+		setType("Player");
 		health=100;
 		bullets=6;
-		armour=0;
+		armor=0;
 	}
-	public Player getPlayer()
+	public static Player getPlayer()
 	{
 		return player;
 	}
 	public void decreaseHealth(int val)
 	{
-		if(armour>0)
-			player.health-=armour;
+		if(armor>0)
+			player.health-=armor;
 		else
 			player.health-=val;
 		if(health==0)
 			System.out.println("lost");
 	}
-	public void increaseHealth(int val)
+	public void increaseHealth()
 	{
-		player.health+=val;
+		player.health+=20;
 		if(player.health>100)
 			player.health=100;
 	}
@@ -35,21 +37,37 @@ public class Player {
 		if(bullets>0)
 			bullets--;
 	}
-	public void extraBullets(int val)
+	public void extraBullets()
 	{
-		player.health+=val;
-		if(player.health>100)
-			player.health=100;
+		player.bullets=6;
 	}
-	public void addArmour()
+	public void addArmor()
 	{
-		armour=100;
+		armor=100;
 	}
-	public void extraArmour()
+	public void extraArmor()
 	{
-		armour+=10;
-		if(armour>100)
-			armour=100;
+		armor+=10;
+		if(armor>100)
+			armor=100;
+	}
+	public int getHealth() {
+		return health;
+	}
+	public int getBullets() {
+		return bullets;
+	}
+	public int getArmor() {
+		return armor;
+	}
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return type;
+	}
+	@Override
+	public void setType(String type) {
+		this.type=type;
 	}
 	
 }
