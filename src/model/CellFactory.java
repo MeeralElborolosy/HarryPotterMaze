@@ -21,4 +21,21 @@ public class CellFactory {
 			return new BigBomb();
 		return null;
 	}
+	public Cell[][] createCells(char cell[][])
+	{
+		Cell maze[][]=new Cell[31][31];
+		for(int i=0;i<30;i++)
+		{
+			for(int j=0;j<31;j++)
+			{
+				if(cell[i][j]=='1')
+					maze[i][j]=new Stone();
+				else if(cell[i][j]=='0')
+					maze[i][j]=new HealthGift();
+				else
+					System.out.println("different: "+i+" "+j);
+			}
+		}
+		return maze;
+	}
 }
