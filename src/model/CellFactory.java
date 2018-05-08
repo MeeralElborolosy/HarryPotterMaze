@@ -19,6 +19,8 @@ public class CellFactory {
 			return new SmallBomb();
 		if(cell.getType()=="BigBomb")
 			return new BigBomb();
+		if(cell.getType()=="EmptyTile")
+			return new BigBomb();
 		return null;
 	}
 	public Cell[][] createCells(char cell[][])
@@ -31,7 +33,21 @@ public class CellFactory {
 				if(cell[i][j]=='1')
 					maze[i][j]=new Stone();
 				else if(cell[i][j]=='0')
+					maze[i][j]=new EmptyTile();
+				else if(cell[i][j]=='2')
+					maze[i][j]=new Trees();
+				else if(cell[i][j]=='3')
 					maze[i][j]=new HealthGift();
+				else if(cell[i][j]=='4')
+					maze[i][j]=new ArmorGift();
+				else if(cell[i][j]=='5')
+					maze[i][j]=new BulletsGift();
+				else if(cell[i][j]=='6')
+					maze[i][j]=new SmallBomb();
+				else if(cell[i][j]=='7')
+					maze[i][j]=new BigBomb();
+				else if(cell[i][j]=='8')
+					maze[i][j]=Player.getPlayer();
 				else
 					System.out.println("different: "+i+" "+j);
 			}
