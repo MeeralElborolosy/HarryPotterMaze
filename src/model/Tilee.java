@@ -19,6 +19,8 @@ public class Tilee  extends Rectangle{
 //import the array and make some ifs;
         if(c.getType()=="Stone")
             setFill(Color.BLACK);
+        if(c.getType()=="")
+        	  setFill( Color.MEDIUMAQUAMARINE);
         if(c.getType()=="Trees")
              setFill(Color.DARKGREEN);
         if(c.getType()=="Player")
