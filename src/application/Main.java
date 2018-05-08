@@ -24,12 +24,25 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+	/*
 	public static void main(String[] args) {
 		MazeParser parser = new MazeParser();
 		CellFactory factory = new CellFactory();
 		Maze.getMaze().setMatrix(factory.createCells(parser.ParseMatrix()));
 		Maze.getMaze().printMatrix();
 		//launch(args);
-	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}*/
 }
