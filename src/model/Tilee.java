@@ -16,25 +16,25 @@ public class Tilee  extends Rectangle{
         setHeight(GameMenuDemo.TILE_SIZE);
 
         relocate(x * GameMenuDemo.TILE_SIZE, y * GameMenuDemo.TILE_SIZE);
-//import the array and make some ifs;
+        
         if(c.getType()=="Stone")
             setFill(Color.BLACK);
-        if(c.getType()=="")
+        else if(c.getType()=="EmptyTile")
         	  setFill( Color.MEDIUMAQUAMARINE);
-        if(c.getType()=="Trees")
+        else if(c.getType()=="Trees")
              setFill(Color.DARKGREEN);
-        if(c.getType()=="Player")
-             setFill( Color.MEDIUMAQUAMARINE);
-        if(c.getType()=="HealthGift")
-             setFill( Color.MEDIUMAQUAMARINE);
-        if(c.getType()=="BulletsGift")
-             setFill( Color.MEDIUMAQUAMARINE);
-        if(c.getType()=="ArmorGift")
-             setFill( Color.MEDIUMAQUAMARINE);
-        if(c.getType()=="SmallBomb")
-             setFill( Color.MEDIUMAQUAMARINE);
-        if(c.getType()=="BigBomb")
-             setFill( Color.MEDIUMAQUAMARINE);
+        else if(c.getType()=="Player")
+             setFill( Color.BLUE);
+        else if(c.getType()=="HealthGift")
+             setFill( Color.ANTIQUEWHITE);
+        else if(c.getType()=="BulletsGift")
+             setFill( Color.SEASHELL);
+        else  if(c.getType()=="ArmorGift")
+             setFill( Color.RED);
+        else if(c.getType()=="SmallBomb")
+             setFill( Color.ROSYBROWN);
+        else if(c.getType()=="BigBomb")
+             setFill( Color.BLUEVIOLET);
         
         
         
