@@ -35,16 +35,19 @@ import javafx.scene.input.KeyCode;
 import control.*;
 import model.*;
 
+
 public class GameMenuDemo extends Application {
 	
-
+		public static Pane root = new Pane();
+	
 		private GameMenu gameMenu;
-	    private MainMenu mainMenu;	   
+	    private MainMenu mainMenu;	
+	    private MazePane mazePane;
+	    private TempMazePane temp;
 
 	    @Override
 	    public void start(Stage primaryStage) throws Exception {
 
-	        Pane root = new Pane();
 	        root.setPrefSize(620, 640);
 
 	        InputStream is = Files.newInputStream(Paths.get("homePage.jpeg"));
@@ -61,16 +64,18 @@ public class GameMenuDemo extends Application {
 	        
 	        mainMenu = new MainMenu();
 	        mainMenu.setVisible(true);
+	        
+	        mazePane = new MazePane();
+	        mazePane.setVisible(false);
+	        
+	        temp = new TempMazePane();
+	        temp.setVisible(false);
 
-	        root.getChildren().addAll(imgView, gameMenu,mainMenu);
+	        root.getChildren().addAll(imgView, gameMenu,mainMenu,mazePane,temp);
 	        
 	        Scene scene = new Scene(root);
 	        scene.setOnKeyPressed(event -> {
 	            if (event.getCode() == KeyCode.ESCAPE) {
-	            	if(Game_State.getState().toString().equals("InGame"))
-	                {
-	                		Game_State.getState().Move(1, 0);
-	                }
 	                if (!gameMenu.isVisible()) {
 	                		
 	                    FadeTransition ft = new FadeTransition(Duration.seconds(0.5), gameMenu);
@@ -89,10 +94,58 @@ public class GameMenuDemo extends Application {
 	                    ft.play();
 	                }
 	            }
+	            if (event.getCode() == KeyCode.RIGHT) {
+	            	if(Game_State.getState().toString().equals("InGame"))
+	                {	
+	            
+	            		if(!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()][MazePlayer.getPlayer().getxPos()+1].getType().equals("Stone")))
+	            		{
+	            			Game_State.getState().Move(1, 0);
+	                		temp.updateMaze();
+	            		}
+	            		
+	                }
+	            }
+	            if (event.getCode() == KeyCode.LEFT) {
+	            	if(Game_State.getState().toString().equals("InGame"))
+	                {
+	            		if(!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()][MazePlayer.getPlayer().getxPos()-1].getType().equals("Stone")))
+	            		{
+	            			Game_State.getState().Move(-1, 0);
+	            			temp.updateMaze();
+	            		}
+	                		
+	                }
+	            }
+	            if (event.getCode() == KeyCode.UP) {
+	            	if(Game_State.getState().toString().equals("InGame"))
+	                {
+	            		if(!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()-1][MazePlayer.getPlayer().getxPos()].getType().equals("Stone")))
+	            		{
+	            			Game_State.getState().Move(0, -1);
+	                		temp.updateMaze();
+	            		}
+	            		
+	                }
+	            }
+	            if (event.getCode() == KeyCode.DOWN) {
+	            	if(Game_State.getState().toString().equals("InGame"))
+	                {
+	            		if(!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()+1][MazePlayer.getPlayer().getxPos()].getType().equals("Stone")))
+	            		{
+	            			Game_State.getState().Move(0, 1);
+	                		temp.updateMaze();
+	            		}
+	                }
+	            }
 	        });
 
 	        primaryStage.setScene(scene);
 	        primaryStage.show();
+	    }
+	    Pane getRoot()
+	    {
+	    	return root; 
 	    }
 	    public static void main(String[] args) {
 	    		MazeParser parser = new MazeParser();

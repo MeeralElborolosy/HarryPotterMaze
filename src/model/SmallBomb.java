@@ -11,7 +11,7 @@ public class SmallBomb extends Bomb{
 	@Override
 	public void BombPlayer() {
 		// TODO Auto-generated method stub
-		Player.getPlayer().decreaseHealth(10);
+		MazePlayer.getPlayer().decreaseHealth(10);
 	}
 
 }

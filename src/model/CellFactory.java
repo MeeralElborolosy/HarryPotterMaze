@@ -8,7 +8,7 @@ public class CellFactory {
 		if(cell.getType()=="Trees")
 			return new Trees();
 		if(cell.getType()=="Player")
-			return Player.getPlayer();
+			return MazePlayer.getPlayer();
 		if(cell.getType()=="HealthGift")
 			return new HealthGift();
 		if(cell.getType()=="BulletsGift")
@@ -47,7 +47,7 @@ public class CellFactory {
 				else if(cell[i][j]=='7')
 					maze[i][j]=new BigBomb();
 				else if(cell[i][j]=='8')
-					maze[i][j]=Player.getPlayer();
+					maze[i][j]=MazePlayer.getPlayer();
 				else
 					System.out.println("different: "+i+" "+j);
 			}

@@ -11,7 +11,7 @@ public class BulletsGift extends Gift{
 	@Override
 	public void gainGift() {
 		// TODO Auto-generated method stub
-		Player.getPlayer().extraBullets();
+		MazePlayer.getPlayer().extraBullets();
 	}
 
 }

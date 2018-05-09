@@ -1,23 +1,27 @@
 package model;
 
-public class Player implements Cell{
-	private static Player player=new Player();
+public class MazePlayer implements Cell{
+	private static MazePlayer player=new MazePlayer();
 	private int health;
 	private int bullets;
 	private int armor;
 	private String type;
 	int xPos;
 	int yPos;
-	private Player()
+	int lastX;
+	int lastY;
+	private MazePlayer()
 	{
 		setType("Player");
 		health=100;
 		bullets=6;
 		armor=0;
 		xPos=0;
-		yPos=0;
+		yPos=1;
+		lastX=0;
+		lastY=1;
 	}
-	public static Player getPlayer()
+	public static MazePlayer getPlayer()
 	{
 		return player;
 	}
@@ -66,9 +70,43 @@ public class Player implements Cell{
 	}
 	public void movePlayer(int x,int y)
 	{
-		xPos+=x;
-		yPos+=y;
-		System.out.println("moved");
+		lastX=xPos;
+		lastY=yPos;
+		if(x>0)
+		{
+			if(xPos<30)
+				xPos+=x;
+		}
+		else if(x<0)
+		{
+			if(xPos>0)
+				xPos+=x;
+		}
+		if(y>0)
+		{
+			if(yPos<29)
+				yPos+=y;
+		}
+		else if(y<0)
+		{
+			if(yPos>1)
+				yPos+=y;
+		}
+	}
+	public int getLastX() {
+		return lastX;
+	}
+	public int getLastY() {
+		return lastY;
+	}
+	public int getxPos() {
+		return xPos;
+	}
+	public void setxPos(int xPos) {
+		this.xPos = xPos;
+	}
+	public int getyPos() {
+		return yPos;
 	}
 	@Override
 	public String getType() {

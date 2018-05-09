@@ -23,4 +23,8 @@ public class Game_State implements GameState{
 	{
 		return state;
 	}
+	public static void setState(Game_State newState)
+	{
+		state=newState;
+	}
 }

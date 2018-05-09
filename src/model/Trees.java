@@ -6,7 +6,7 @@ public class Trees extends Wall{
 		this.setType("Trees");
 	}
 	String type="Trees";
-	Player player=Player.getPlayer();
+	MazePlayer player=MazePlayer.getPlayer();
 	@Override
 	public void breakWall() {
 		// TODO Auto-generated method stub

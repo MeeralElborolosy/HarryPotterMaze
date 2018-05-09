@@ -11,7 +11,7 @@ public class HealthGift extends Gift{
 	@Override
 	public void gainGift() {
 		// TODO Auto-generated method stub
-		Player.getPlayer().increaseHealth();
+		MazePlayer.getPlayer().increaseHealth();
 	}
 	
 }

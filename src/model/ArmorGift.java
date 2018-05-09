@@ -11,10 +11,10 @@ public class ArmorGift extends Gift{
 	@Override
 	public void gainGift() {
 		// TODO Auto-generated method stub
-		if(Player.getPlayer().getArmor()==0)
-			Player.getPlayer().addArmor();
+		if(MazePlayer.getPlayer().getArmor()==0)
+			MazePlayer.getPlayer().addArmor();
 		else
-			Player.getPlayer().extraArmor();
+			MazePlayer.getPlayer().extraArmor();
 	}
 
 }

@@ -1,5 +1,6 @@
 package view;
 
+import control.Game_State;
 import control.InGame;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
@@ -24,16 +25,12 @@ public class MainMenu extends Parent{
 	       System.exit(0);
 	   });
 	   btnNewgame.setOnMouseClicked(event -> {
-	       for(int i=0;i<31;i++)
-	       {
-	    	   		for(int j=0;j<30;j++)
-	    	   		{
-	    	   			Tilee tile=new Tilee(Maze.getMatrix()[j][i], i, j);
-	    	   			getChildren().add(tile);
-	    	   		}
-	       }
-	       
-	       
+		   GameMenuDemo.root.getChildren().get(4).setVisible(true);
+		   Game_State.setState(new InGame());
+	   });
+	   btnContinue.setOnMouseClicked(event -> {
+		   GameMenuDemo.root.getChildren().get(4).setVisible(true);
+		   Game_State.setState(new InGame());
 	   });
 	   menu3.getChildren().addAll(btnContinue, btnNewgame, btnHighscore,btnExit);
 	 
@@ -45,7 +42,6 @@ public class MainMenu extends Parent{
 	   
 	   
 		}
-		
 		
 		
 		

@@ -10,7 +10,7 @@ public class BigBomb extends Bomb{
 	@Override
 	public void BombPlayer() {
 		// TODO Auto-generated method stub
-		Player.getPlayer().decreaseHealth(20);
+		MazePlayer.getPlayer().decreaseHealth(20);
 	}
 
 }
