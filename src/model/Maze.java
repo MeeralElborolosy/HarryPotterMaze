@@ -2,7 +2,7 @@ package model;
 
 public class Maze {
 	private static Maze maze=new Maze();
-	Cell[][] matrix;
+	private static Cell[][] matrix;
 	private Maze()
 	{
 		matrix=new Cell[30][31];
@@ -17,6 +17,13 @@ public class Maze {
 			for(int j=0;j<31;j++)
 				matrix[i][j]=newMatrix[i][j];
 	}
+	
+	public static Cell[][] getMatrix()
+	{
+		return  matrix; 
+	}
+	
+	
 	public void printMatrix()
 	{
 		for(int i=0;i<30;i++)
@@ -27,6 +34,8 @@ public class Maze {
 					System.out.print("1");
 				else if(matrix[i][j].getType().equals("HealthGift"))
 					System.out.print("0");
+			
+			
 			}
 			System.out.println();
 		}
