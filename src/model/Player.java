@@ -6,12 +6,16 @@ public class Player implements Cell{
 	private int bullets;
 	private int armor;
 	private String type;
+	int xPos;
+	int yPos;
 	private Player()
 	{
 		setType("Player");
 		health=100;
 		bullets=6;
 		armor=0;
+		xPos=0;
+		yPos=0;
 	}
 	public static Player getPlayer()
 	{
@@ -59,6 +63,12 @@ public class Player implements Cell{
 	}
 	public int getArmor() {
 		return armor;
+	}
+	public void movePlayer(int x,int y)
+	{
+		xPos+=x;
+		yPos+=y;
+		System.out.println("moved");
 	}
 	@Override
 	public String getType() {

@@ -6,15 +6,11 @@ import view.GameMenuDemo;
 
 public class Tilee  extends Rectangle{
 	 
-
-	   
-    
-
     public Tilee(Cell c, int x, int y) {
-        setWidth(GameMenuDemo.TILE_SIZE);
-        setHeight(GameMenuDemo.TILE_SIZE);
+        setWidth(30);
+        setHeight(31);
 
-        relocate(x * GameMenuDemo.TILE_SIZE, y * GameMenuDemo.TILE_SIZE);
+        relocate(x *20, y * 20);
         
         if(c.getType()=="Stone")
             setFill(Color.BLACK);
@@ -34,12 +30,6 @@ public class Tilee  extends Rectangle{
              setFill( Color.ROSYBROWN);
         else if(c.getType()=="BigBomb")
              setFill( Color.BLUEVIOLET);
-        
-        
-        
-        
-        
-        //setFill(wall ? Color.valueOf("#feb") : Color.valueOf("#582"));
     }
 }
 
