@@ -18,6 +18,7 @@ public class MazeParser {
             }   
             // Always close files.
             bf.close();
+            f.close();
 		}
 		catch(Exception e)
 		{
