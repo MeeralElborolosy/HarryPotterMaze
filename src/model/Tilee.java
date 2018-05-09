@@ -1,6 +1,5 @@
 package model;
 
-import application.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import view.GameMenuDemo;

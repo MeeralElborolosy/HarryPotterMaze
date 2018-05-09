@@ -1,4 +1,7 @@
 package view;
+import java.io.FileInputStream;
+import javazoom.jl.player.Player;
+
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -300,8 +303,20 @@ public class GameMenuDemo extends Application {
 			CellFactory factory = new CellFactory();
 			Maze.getMaze().setMatrix(factory.createCells(parser.ParseMatrix()));
 			Maze.getMaze().printMatrix();
+			new Thread() {
+			public void run() {
+				try(FileInputStream f=new FileInputStream("Harry Potter Theme Song (1).mp3"))
+				{
+					new Player(f).play();
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+			}.start();
 	    	launch(args);
-	   
+	    	
 	    
 	    
 	    }
