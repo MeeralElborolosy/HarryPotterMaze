@@ -79,11 +79,13 @@ public class MazeParser {
 							writer.write("7");
 					else if(Maze.getMaze().getMatrix()[i][j].getType().equals("Player"))
 							writer.write("8");
-					
+					else
+						writer.write("-1");
 							
 				}
 				writer.println("");
 			}
+			writer.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -113,6 +113,11 @@ public class MazePlayer implements Cell{
 	}
 	public void setxPos(int xPos) {
 		this.xPos = xPos;
+		this.lastX=xPos;
+	}
+	public void setyPos(int yPos) {
+		this.yPos = yPos;
+		this.lastY=yPos;
 	}
 	public int getyPos() {
 		return yPos;

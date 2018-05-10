@@ -28,9 +28,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.CellFactory;
-import model.Maze;
-import model.Tilee;
 import javafx.scene.input.KeyCode;
 import control.*;
 import model.*;
@@ -44,7 +41,7 @@ public class GameMenuDemo extends Application {
 	    private MainMenu mainMenu;	
 	    private MazePane mazePane;
 	    private TempMazePane temp;
-
+ 
 	    @Override
 	    public void start(Stage primaryStage) throws Exception {
 
@@ -53,13 +50,16 @@ public class GameMenuDemo extends Application {
 	        InputStream is = Files.newInputStream(Paths.get("homePage.jpeg"));
 	        Image img = new Image(is);
 	        is.close();
-
+	        MazeParser parser = new MazeParser();
+			CellFactory factory = new CellFactory();
+			Maze.getMaze().setMatrix(factory.createCells(parser.ParseMatrix()));
+			//Maze.getMaze().PrintMatrix();
+			
 	        ImageView imgView = new ImageView(img);
 	        imgView.setFitWidth(620);
 	        imgView.setFitHeight(620);
 
 	        gameMenu = new GameMenu();
-	       // mainMenu = new GameMenu();
 	        gameMenu.setVisible(false);
 	        
 	        mainMenu = new MainMenu();
@@ -70,6 +70,7 @@ public class GameMenuDemo extends Application {
 	        
 	        temp = new TempMazePane();
 	        temp.setVisible(false);
+	        temp.reDraw();
 
 	        root.getChildren().addAll(imgView, gameMenu,mainMenu,mazePane,temp);
 	        
@@ -146,12 +147,11 @@ public class GameMenuDemo extends Application {
 	        primaryStage.setScene(scene);
 	        primaryStage.show();
 	    }
-	    Pane getRoot()
-	    {
-	    	return root; 
-	    }
 	    public static void main(String[] args) {
-	    		System.out.println("ana shaghal");
+	    	MazeParser parser = new MazeParser();
+			CellFactory factory = new CellFactory();
+			Maze.getMaze().setMatrix(factory.createCells(parser.ParseMatrix()));
+			Maze.getMaze().PrintMatrix();
 			new Thread() {
 			public void run() {
 				try(FileInputStream f=new FileInputStream("Harry Potter Theme Song (1).mp3"))
@@ -167,17 +167,6 @@ public class GameMenuDemo extends Application {
 			launch(args);
 	    }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

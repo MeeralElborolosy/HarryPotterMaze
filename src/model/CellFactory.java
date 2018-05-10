@@ -47,7 +47,11 @@ public class CellFactory {
 				else if(cell[i][j]=='7')
 					maze[i][j]=new BigBomb();
 				else if(cell[i][j]=='8')
+				{
 					maze[i][j]=MazePlayer.getPlayer();
+					MazePlayer.getPlayer().setxPos(j);
+					MazePlayer.getPlayer().setyPos(i);
+				}
 				else
 					System.out.println("different: "+i+" "+j);
 			}

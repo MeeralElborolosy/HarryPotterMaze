@@ -37,6 +37,8 @@ public class MainMenu extends Parent{
 		   MazeParser parser = new MazeParser();
 			CellFactory factory = new CellFactory();
 			Maze.getMaze().setMatrix(factory.createCells(parser.LoadMatrix()));
+			Maze.getMaze().PrintMatrix();
+		   ((TempMazePane) GameMenuDemo.root.getChildren().get(4)).reDraw();
 		   GameMenuDemo.root.getChildren().get(4).setVisible(true);
 		   Game_State.setState(new InGame());
 	   });

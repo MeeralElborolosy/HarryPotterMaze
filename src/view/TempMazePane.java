@@ -29,9 +29,21 @@ public class TempMazePane extends Pane{
 	}
 	public void updateMaze()
 	{
-		Maze.getMatrix()[MazePlayer.getPlayer().getLastX()][MazePlayer.getPlayer().getLastY()]=new EmptyTile();
-		Maze.getMatrix()[MazePlayer.getPlayer().getxPos()][MazePlayer.getPlayer().getyPos()]=MazePlayer.getPlayer();
+		Maze.getMatrix()[MazePlayer.getPlayer().getLastY()][MazePlayer.getPlayer().getLastX()]=new EmptyTile();
+		Maze.getMatrix()[MazePlayer.getPlayer().getyPos()][MazePlayer.getPlayer().getxPos()]=MazePlayer.getPlayer();
+		System.out.println(Maze.getMatrix()[MazePlayer.getPlayer().getxPos()][MazePlayer.getPlayer().getyPos()].getType());
 		MazeParser p=new MazeParser();
 		p.SaveMatrix();
+		reDraw();
+	}
+	public void reDraw()
+	{
+	    for (int y = 0; y < HEIGHT; y++) {
+	        for (int x = 0; x < WIDTH; x++) {
+	            Tilee tile = new Tilee(Maze.getMaze().getMatrix()[y][x], x, y);
+	            board[x][y] = tile;
+	            this.getChildren().add(tile);    
+	        }
+	    }
 	}
 }
