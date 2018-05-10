@@ -2,6 +2,7 @@ package view;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import model.EmptyTile;
 import model.Maze;
 import model.MazePlayer;
 import model.Tilee;
@@ -27,6 +28,8 @@ public class TempMazePane extends Pane{
 	}
 	public void updateMaze()
 	{
+		//Maze.getMatrix()[MazePlayer.getPlayer().getLastX()][MazePlayer.getPlayer().getLastY()]=new EmptyTile();
+		//Maze.getMatrix()[MazePlayer.getPlayer().getxPos()][MazePlayer.getPlayer().getyPos()]=MazePlayer.getPlayer();
 		board[MazePlayer.getPlayer().getLastX()][MazePlayer.getPlayer().getLastY()].setFill(Color.MEDIUMAQUAMARINE);
 		board[MazePlayer.getPlayer().getxPos()][MazePlayer.getPlayer().getyPos()].setFill(Color.BLUE);
 	}

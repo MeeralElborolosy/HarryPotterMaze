@@ -1,5 +1,8 @@
 package model;
 
+import control.Game_State;
+import control.Winner;
+
 public class MazePlayer implements Cell{
 	private static MazePlayer player=new MazePlayer();
 	private int health;
@@ -84,7 +87,7 @@ public class MazePlayer implements Cell{
 		}
 		if(y>0)
 		{
-			if(yPos<29)
+			if(yPos<28)
 				yPos+=y;
 		}
 		else if(y<0)
@@ -92,6 +95,12 @@ public class MazePlayer implements Cell{
 			if(yPos>1)
 				yPos+=y;
 		}
+		if(xPos==30&&yPos==28)
+		{
+			System.out.println("kasabty");
+			Game_State.getState().setState(new Winner());
+		}
+		System.out.println(xPos+" "+yPos);
 	}
 	public int getLastX() {
 		return lastX;
