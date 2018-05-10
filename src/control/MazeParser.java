@@ -7,7 +7,7 @@ public class MazeParser {
 	public char[][] ParseMatrix()
 	{
 		String line=null;
-		char[][] cells=new char[31][31];
+		char[][] cells=new char[30][31];
 		try{
 			FileReader f = new FileReader("Maze.txt");
 			BufferedReader bf = new BufferedReader(f);
