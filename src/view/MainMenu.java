@@ -2,10 +2,12 @@ package view;
 
 import control.Game_State;
 import control.InGame;
+import control.MazeParser;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import model.CellFactory;
 import model.Maze;
 import model.Tilee;
 
@@ -25,10 +27,16 @@ public class MainMenu extends Parent{
 	       System.exit(0);
 	   });
 	   btnNewgame.setOnMouseClicked(event -> {
+		   MazeParser parser = new MazeParser();
+			CellFactory factory = new CellFactory();
+			Maze.getMaze().setMatrix(factory.createCells(parser.ParseMatrix()));
 		   GameMenuDemo.root.getChildren().get(4).setVisible(true);
 		   Game_State.setState(new InGame());
 	   });
 	   btnContinue.setOnMouseClicked(event -> {
+		   MazeParser parser = new MazeParser();
+			CellFactory factory = new CellFactory();
+			Maze.getMaze().setMatrix(factory.createCells(parser.LoadMatrix()));
 		   GameMenuDemo.root.getChildren().get(4).setVisible(true);
 		   Game_State.setState(new InGame());
 	   });

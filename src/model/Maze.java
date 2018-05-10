@@ -26,7 +26,7 @@ public class Maze {
 	
 	public void printMatrix()
 	{
-		for(int i=0;i<30;i++)
+		/*for(int i=0;i<30;i++)
 		{
 			for(int j=0;j<31;j++)
 			{
@@ -34,10 +34,10 @@ public class Maze {
 					System.out.print("1");
 				else if(matrix[i][j].getType().equals("HealthGift"))
 					System.out.print("0");
-			
+				else if
 			
 			}
 			System.out.println();
-		}
+		}*/
 	}
 }

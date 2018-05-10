@@ -98,6 +98,7 @@ public class GameMenuDemo extends Application {
 	            	if(Game_State.getState().toString().equals("InGame"))
 	                {	
 	            
+	            		
 	            		if(!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()][MazePlayer.getPlayer().getxPos()+1].getType().equals("Stone")))
 	            		{
 	            			Game_State.getState().Move(1, 0);
@@ -107,9 +108,11 @@ public class GameMenuDemo extends Application {
 	                }
 	            }
 	            if (event.getCode() == KeyCode.LEFT) {
-	            	if(Game_State.getState().toString().equals("InGame"))
-	                {
-	            		if(!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()][MazePlayer.getPlayer().getxPos()-1].getType().equals("Stone")))
+	            	System.out.println("hello");
+	            	if(Game_State.getState().toString().equals("InGame")){
+	            		if(MazePlayer.getPlayer().getxPos()==0) {
+	            		}
+	            		else if(!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()][MazePlayer.getPlayer().getxPos()-1].getType().equals("Stone")))
 	            		{
 	            			Game_State.getState().Move(-1, 0);
 	            			temp.updateMaze();
@@ -148,10 +151,7 @@ public class GameMenuDemo extends Application {
 	    	return root; 
 	    }
 	    public static void main(String[] args) {
-	    		MazeParser parser = new MazeParser();
-			CellFactory factory = new CellFactory();
-			Maze.getMaze().setMatrix(factory.createCells(parser.ParseMatrix()));
-			Maze.getMaze().printMatrix();
+	    		System.out.println("ana shaghal");
 			new Thread() {
 			public void run() {
 				try(FileInputStream f=new FileInputStream("Harry Potter Theme Song (1).mp3"))

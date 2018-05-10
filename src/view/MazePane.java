@@ -18,7 +18,7 @@ public class MazePane extends Pane{
 	     
 	    for (int y = 0; y < HEIGHT; y++) {
 	        for (int x = 0; x < WIDTH; x++) {
-	            Tilee tile = new Tilee(Maze.getMaze().getMatrix()[y][x], x, y);
+	            Tilee tile = new Tilee(Maze.getMaze().getMatrix()[y][x], y, x);
 	
 	            this.getChildren().add(tile);  
         }

@@ -1,5 +1,6 @@
 package view;
 
+import control.MazeParser;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import model.EmptyTile;
@@ -23,14 +24,14 @@ public class TempMazePane extends Pane{
 	            Tilee tile = new Tilee(Maze.getMaze().getMatrix()[y][x], x, y);
 	            board[x][y] = tile;
 	            this.getChildren().add(tile);    
-        }
-    }
+	        }
+	    }
 	}
 	public void updateMaze()
 	{
-		//Maze.getMatrix()[MazePlayer.getPlayer().getLastX()][MazePlayer.getPlayer().getLastY()]=new EmptyTile();
-		//Maze.getMatrix()[MazePlayer.getPlayer().getxPos()][MazePlayer.getPlayer().getyPos()]=MazePlayer.getPlayer();
-		board[MazePlayer.getPlayer().getLastX()][MazePlayer.getPlayer().getLastY()].setFill(Color.MEDIUMAQUAMARINE);
-		board[MazePlayer.getPlayer().getxPos()][MazePlayer.getPlayer().getyPos()].setFill(Color.BLUE);
+		Maze.getMatrix()[MazePlayer.getPlayer().getLastX()][MazePlayer.getPlayer().getLastY()]=new EmptyTile();
+		Maze.getMatrix()[MazePlayer.getPlayer().getxPos()][MazePlayer.getPlayer().getyPos()]=MazePlayer.getPlayer();
+		MazeParser p=new MazeParser();
+		p.SaveMatrix();
 	}
 }
