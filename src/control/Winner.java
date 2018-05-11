@@ -12,7 +12,7 @@ public class Winner extends Game_State{
 	}
 
 	@Override
-	public void HitSpaceBar() {
+	public void HitSpaceBar(char lastPressed) {
 		// TODO Auto-generated method stub
 		//MazePlayer.getPlayer().fireBullets();
 	}

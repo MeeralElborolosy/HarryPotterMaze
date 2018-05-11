@@ -40,11 +40,12 @@ public class GameMenuDemo extends Application {
 		private GameMenu gameMenu;
 	    private MainMenu mainMenu;	
 	    private MazePane mazePane;
-	    private TempMazePane temp;
+	    
+	    char lastPressed = 0;
  
 	    @Override
 	    public void start(Stage primaryStage) throws Exception {
-
+     
 	        root.setPrefSize(620, 640);
 
 	        InputStream is = Files.newInputStream(Paths.get("homePage.jpeg"));
@@ -67,14 +68,12 @@ public class GameMenuDemo extends Application {
 	        
 	        mazePane = new MazePane();
 	        mazePane.setVisible(false);
-	        
-	        temp = new TempMazePane();
-	        temp.setVisible(false);
-	        temp.reDraw();
+	        mazePane.reDraw();
 
-	        root.getChildren().addAll(imgView, gameMenu,mainMenu,mazePane,temp);
+	        root.getChildren().addAll(imgView, gameMenu,mainMenu,mazePane);
 	        
 	        Scene scene = new Scene(root);
+	     
 	        scene.setOnKeyPressed(event -> {
 	            if (event.getCode() == KeyCode.ESCAPE) {
 	                if (!gameMenu.isVisible()) {
@@ -99,46 +98,62 @@ public class GameMenuDemo extends Application {
 	            	if(Game_State.getState().toString().equals("InGame"))
 	                {	
 	            
-	            		
-	            		if(!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()][MazePlayer.getPlayer().getxPos()+1].getType().equals("Stone")))
+	            		if(MazePlayer.getPlayer().getxPos()==30) {}
+	            		else if(!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()][MazePlayer.getPlayer().getxPos()+1].getType().equals("Stone"))&&!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()][MazePlayer.getPlayer().getxPos()+1].getType().equals("Trees")))
 	            		{
 	            			Game_State.getState().Move(1, 0);
-	                		temp.updateMaze();
+	                		mazePane.updateMaze();
 	            		}
 	            		
 	                }
+	            	lastPressed='r';
 	            }
 	            if (event.getCode() == KeyCode.LEFT) {
-	            	System.out.println("hello");
 	            	if(Game_State.getState().toString().equals("InGame")){
 	            		if(MazePlayer.getPlayer().getxPos()==0) {
 	            		}
-	            		else if(!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()][MazePlayer.getPlayer().getxPos()-1].getType().equals("Stone")))
+	            		else if(!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()][MazePlayer.getPlayer().getxPos()-1].getType().equals("Stone"))&&!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()][MazePlayer.getPlayer().getxPos()-1].getType().equals("Trees")))
 	            		{
 	            			Game_State.getState().Move(-1, 0);
-	            			temp.updateMaze();
+	            			mazePane.updateMaze();
 	            		}
 	                		
 	                }
+	            	lastPressed='l';
 	            }
 	            if (event.getCode() == KeyCode.UP) {
 	            	if(Game_State.getState().toString().equals("InGame"))
 	                {
-	            		if(!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()-1][MazePlayer.getPlayer().getxPos()].getType().equals("Stone")))
+	            		if(!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()-1][MazePlayer.getPlayer().getxPos()].getType().equals("Stone"))&&!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()-1][MazePlayer.getPlayer().getxPos()].getType().equals("Trees")))
 	            		{
 	            			Game_State.getState().Move(0, -1);
-	                		temp.updateMaze();
+	                		mazePane.updateMaze();
 	            		}
 	            		
 	                }
+	            	lastPressed='u';
 	            }
 	            if (event.getCode() == KeyCode.DOWN) {
 	            	if(Game_State.getState().toString().equals("InGame"))
 	                {
-	            		if(!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()+1][MazePlayer.getPlayer().getxPos()].getType().equals("Stone")))
+	            		if(!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()+1][MazePlayer.getPlayer().getxPos()].getType().equals("Stone"))&&!(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()+1][MazePlayer.getPlayer().getxPos()].getType().equals("Trees")))
 	            		{
 	            			Game_State.getState().Move(0, 1);
-	                		temp.updateMaze();
+	                		mazePane.updateMaze();
+	            		}
+	                }
+	            	lastPressed='d';
+	            }
+	            if (event.getCode() == KeyCode.SPACE) {
+	            	if(Game_State.getState().toString().equals("InGame"))
+	                {
+	            		if((Maze.getMatrix()[MazePlayer.getPlayer().getyPos()+1][MazePlayer.getPlayer().getxPos()].getType().equals("Trees"))
+	            				||(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()-1][MazePlayer.getPlayer().getxPos()].getType().equals("Trees"))
+	            				||(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()][MazePlayer.getPlayer().getxPos()+1].getType().equals("Trees"))
+	            				||(Maze.getMatrix()[MazePlayer.getPlayer().getyPos()][MazePlayer.getPlayer().getxPos()-1].getType().equals("Trees")))
+	            		{
+	            			Game_State.getState().HitSpaceBar(lastPressed);
+	                		mazePane.updateMaze();
 	            		}
 	                }
 	            }

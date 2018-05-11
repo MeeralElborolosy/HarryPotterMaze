@@ -11,7 +11,7 @@ public class Game_State implements GameState{
 	}
 
 	@Override
-	public void HitSpaceBar() {
+	public void HitSpaceBar(char lastPressed) {
 		
 	}
 

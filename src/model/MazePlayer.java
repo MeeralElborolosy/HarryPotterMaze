@@ -43,10 +43,13 @@ public class MazePlayer implements Cell{
 		if(player.health>100)
 			player.health=100;
 	}
-	public void fireBullets()
+	public void fireBullets(int x,int y)
 	{
 		if(bullets>0)
+		{
 			bullets--;
+			Maze.getMatrix()[y][x]=new EmptyTile();
+		}
 	}
 	public void extraBullets()
 	{
@@ -113,11 +116,11 @@ public class MazePlayer implements Cell{
 	}
 	public void setxPos(int xPos) {
 		this.xPos = xPos;
-		this.lastX=xPos;
+		//this.lastX=xPos;
 	}
 	public void setyPos(int yPos) {
 		this.yPos = yPos;
-		this.lastY=yPos;
+		//this.lastY=yPos;
 	}
 	public int getyPos() {
 		return yPos;
