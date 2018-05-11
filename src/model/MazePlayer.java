@@ -1,7 +1,11 @@
 package model;
 
+import control.CheckPoints;
 import control.Game_State;
+import control.Memento;
 import control.Winner;
+import view.GameMenuDemo;
+import view.MazePane;
 
 public class MazePlayer implements Cell{
 	private static MazePlayer player=new MazePlayer();
@@ -13,6 +17,7 @@ public class MazePlayer implements Cell{
 	int yPos;
 	int lastX;
 	int lastY;
+	CheckPoints checkPoints;
 	private MazePlayer()
 	{
 		setType("Player");
@@ -23,6 +28,7 @@ public class MazePlayer implements Cell{
 		yPos=1;
 		lastX=0;
 		lastY=1;
+		checkPoints=new CheckPoints(new Memento(xPos,yPos));
 	}
 	public static MazePlayer getPlayer()
 	{
@@ -34,8 +40,14 @@ public class MazePlayer implements Cell{
 			player.health-=armor;
 		else
 			player.health-=val;
-		if(health==0)
-			System.out.println("lost");
+		if(health<=0)
+		{
+			xPos=checkPoints.getLastCheckPoint().getX();
+			yPos=checkPoints.getLastCheckPoint().getY();
+			((MazePane) GameMenuDemo.root.getChildren().get(3)).reDraw();
+			this.increaseHealth();
+			System.out.println("no health");
+		}
 	}
 	public void increaseHealth()
 	{
@@ -89,7 +101,7 @@ public class MazePlayer implements Cell{
 				xPos+=x;
 		}
 		if(y>0)
-		{
+		{ 
 			if(yPos<28)
 				yPos+=y;
 		}
@@ -103,6 +115,23 @@ public class MazePlayer implements Cell{
 			System.out.println("kasabty");
 			Game_State.getState().setState(new Winner());
 		}
+		else if(Maze.getMatrix()[yPos][xPos].getType().equals("BulletsGift"))
+			this.extraBullets();
+		else if(Maze.getMatrix()[yPos][xPos].getType().equals("SmallBomb"))
+			this.decreaseHealth(10);
+		else if(Maze.getMatrix()[yPos][xPos].getType().equals("BigBomb"))
+			this.decreaseHealth(20);
+		else if(Maze.getMatrix()[yPos][xPos].getType().equals("HealthGift"))
+			this.increaseHealth();
+		else if(Maze.getMatrix()[yPos][xPos].getType().equals("ArmorGift"))
+		{
+			if(this.getArmor()>0)
+				this.extraArmor();
+			else
+				this.addArmor();
+		}
+		if(Memento.inCheckPoint())
+			checkPoints.saveCheckPoint(new Memento(xPos,yPos));
 		System.out.println(xPos+" "+yPos);
 	}
 	public int getLastX() {
