@@ -37,6 +37,8 @@ import model.*;
 public class GameMenuDemo extends Application {
 	
 		public static Pane root = new Pane();
+		public static Player music;
+		public static boolean playing;
 	
 		private GameMenu gameMenu;
 	    private MainMenu mainMenu;	
@@ -77,13 +79,15 @@ public class GameMenuDemo extends Application {
 	     
 	        scene.setOnKeyPressed(event -> {
 	            if (event.getCode() == KeyCode.ESCAPE) {
-	                if (!gameMenu.isVisible()) {
+	                //if(Game_State.getState().equals("InGame")) {
+	            	if (!gameMenu.isVisible()) {
 	                		
 	                    FadeTransition ft = new FadeTransition(Duration.seconds(0.5), gameMenu);
 	                    ft.setFromValue(0);
 	                    ft.setToValue(1);
 	                    gameMenu.setVisible(true);
 	                    mainMenu.setVisible(false);
+	                    mazePane.setVisible(false);
 	                    ft.play();
 	                }
 	                else {
@@ -94,7 +98,8 @@ public class GameMenuDemo extends Application {
 	                    mainMenu.setVisible(true);
 	                    ft.play();
 	                }
-	            }
+	            }//}
+	            else {
 	            if (event.getCode() == KeyCode.RIGHT) {
 	            	if(Game_State.getState().toString().equals("InGame"))
 	                {	
@@ -163,7 +168,11 @@ public class GameMenuDemo extends Application {
 	            		}
 	                }
 	            }
-	        });
+	            if(Game_State.getState().equals("Loser"))
+	            {
+	            	System.out.println("Khasarty");
+	            }
+	            }});
 
 	        primaryStage.setScene(scene);
 	        primaryStage.show();
@@ -174,12 +183,14 @@ public class GameMenuDemo extends Application {
 			Maze.getMaze().setMatrix(factory.createCells(parser.ParseMatrix()));
 			Maze.getMaze().PrintMatrix();
 			Timer t=new Timer(true);
-			t.scheduleAtFixedRate(Voldemort.getYouKnowWho(),(long)1000,(long)1000);
+			playing=true;
+			t.scheduleAtFixedRate(Voldemort.getYouKnowWho(),(long)2000,(long)2000);
 			new Thread() {
 			public void run() {
 				try(FileInputStream f=new FileInputStream("Harry Potter Theme Song (1).mp3"))
 				{
-					new Player(f).play();
+					music=new Player(f);
+					music.play();
 				}
 				catch(Exception e)
 				{

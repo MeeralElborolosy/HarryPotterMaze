@@ -1,5 +1,7 @@
 package view;
 
+import java.io.FileInputStream;
+
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Parent;
@@ -9,6 +11,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 public class GameMenu extends Parent {
     public GameMenu() {
@@ -35,31 +39,39 @@ public class GameMenu extends Parent {
             ft.setToValue(0);
             ft.setOnFinished(evt -> setVisible(false));
             ft.play();
-            getChildren().remove(getChildren().size()-1);
+            GameMenuDemo.root.getChildren().get(3).setVisible(true);
         });
 
 
-        MenuButton btnOptions = new MenuButton("OPTIONS");
+        MenuButton btnOptions = new MenuButton("SOUND");
         btnOptions.setOnMouseClicked(event -> {
-            getChildren().add(menu1);
-
-            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu0);
-            tt.setToX(menu0.getTranslateX() - offset);
-
-            TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu1);
-            tt1.setToX(menu0.getTranslateX());
-
-            tt.play();
-            tt1.play();
-
-            tt.setOnFinished(evt -> {
-                getChildren().remove(menu0);
+        	if(!GameMenuDemo.playing) {
+        		new Thread() {
+        			public void run() {
+        				try(FileInputStream f=new FileInputStream("Harry Potter Theme Song (1).mp3"))
+        				{
+        					GameMenuDemo.music=new Player(f);
+        					GameMenuDemo.music.play();
+        				}
+        				catch(Exception e)
+        				{
+        					e.printStackTrace();
+        				}
+        			}
+        			}.start();
+        			GameMenuDemo.playing=true;
+        	}
+        	else
+        	{
+        		GameMenuDemo.music.close();
+        		GameMenuDemo.playing=false;
+        	}
             });
-        });
-
         MenuButton btnExit = new MenuButton("EXIT");
         btnExit.setOnMouseClicked(event -> {
-            System.exit(0);
+        	GameMenuDemo.root.getChildren().get(2).setVisible(true);
+        	GameMenuDemo.root.getChildren().get(1).setVisible(false);
+        	GameMenuDemo.root.getChildren().get(3).setVisible(false);
         });
 
         MenuButton btnBack = new MenuButton("BACK");
@@ -79,15 +91,10 @@ public class GameMenu extends Parent {
                 getChildren().remove(menu1);
             });
         });
-
-        MenuButton btnSound = new MenuButton("SOUND");
-        MenuButton btnSave = new MenuButton("SAVE");
-        MenuButton btnLoad = new MenuButton("LOAD");
         
         
 
         menu0.getChildren().addAll(btnResume, btnOptions, btnExit);
-        menu1.getChildren().addAll(btnBack, btnSound, btnSave,btnLoad);
         
 
         Rectangle bg = new Rectangle(620, 620);

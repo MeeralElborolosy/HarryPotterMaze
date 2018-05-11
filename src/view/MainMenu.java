@@ -21,7 +21,6 @@ public class MainMenu extends Parent{
 	   MenuButton btnContinue = new MenuButton("CONTINUE");
 	   MenuButton btnNewgame = new MenuButton("NEW GAME");
 	   
-	   MenuButton btnHighscore = new MenuButton("HIGHSCORES");
 	   MenuButton btnExit = new MenuButton("EXIT");
 	   btnExit.setOnMouseClicked(event -> {
 	       System.exit(0);
@@ -42,7 +41,7 @@ public class MainMenu extends Parent{
 		   GameMenuDemo.root.getChildren().get(3).setVisible(true);
 		   Game_State.setState(new InGame());
 	   });
-	   menu3.getChildren().addAll(btnContinue, btnNewgame, btnHighscore,btnExit);
+	   menu3.getChildren().addAll(btnContinue, btnNewgame,btnExit);
 	 
 	   Rectangle bg = new Rectangle(800, 600);
 	   bg.setFill(Color.GREY);

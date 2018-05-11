@@ -40,7 +40,6 @@ public class MazePane extends Pane{
 	{
 	    for (int y = 0; y < HEIGHT; y++) {
 	        for (int x = 0; x < WIDTH; x++) {
-	        	System.out.println(y);
 	            Tilee tile = new Tilee(Maze.getMaze().getMatrix()[y][x], x, y);
 	            board[x][y] = tile;
 	            this.getChildren().add(tile);    

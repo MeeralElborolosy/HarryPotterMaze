@@ -29,12 +29,11 @@ public class Voldemort extends TimerTask{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		if(x<30)
+		if(x<29)
 			getYouKnowWho().x+=1;
 		else
 			getYouKnowWho().x=21;
 		//getYouKnowWho().y+=1;
-		System.out.println("hello");
 	}
 	public int getXpos()
 	{

@@ -40,16 +40,18 @@ public class MazePlayer implements Cell{
 			player.armor-=val;
 		else
 		{
-			int temp=val;
+			int temp=player.armor;
 			player.armor=0;
 			player.health-=(val-temp);
 		}
 		if(health<=0)
 		{
-			xPos=checkPoints.getLastCheckPoint().getX();
-			yPos=checkPoints.getLastCheckPoint().getY();
+			Maze.getMatrix()[yPos][xPos]=new EmptyTile();
+			Memento lastPos=checkPoints.getLastCheckPoint();
+			xPos=lastPos.getX();
+			yPos=lastPos.getY();
 			((MazePane) GameMenuDemo.root.getChildren().get(3)).reDraw();
-			this.increaseHealth();
+			this.health=20;
 			System.out.println("no health");
 		}
 	}
@@ -134,6 +136,8 @@ public class MazePlayer implements Cell{
 			else
 				this.addArmor();
 		}
+		else if(xPos==Voldemort.getYouKnowWho().getXpos()&&yPos==Voldemort.getYouKnowWho().getYpos())
+			this.decreaseHealth(30);
 		if(Memento.inCheckPoint())
 			checkPoints.saveCheckPoint(new Memento(xPos,yPos));
 		System.out.println(xPos+" "+yPos);
