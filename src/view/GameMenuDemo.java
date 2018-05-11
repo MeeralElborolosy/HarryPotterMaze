@@ -103,6 +103,7 @@ public class GameMenuDemo extends Application {
 	            		{
 	            			Game_State.getState().Move(1, 0);
 	                		mazePane.updateMaze();
+	                		Observer.getObserver().updateObservers();
 	            		}
 	            		
 	                }
@@ -116,6 +117,7 @@ public class GameMenuDemo extends Application {
 	            		{
 	            			Game_State.getState().Move(-1, 0);
 	            			mazePane.updateMaze();
+	            			Observer.getObserver().updateObservers();
 	            		}
 	                		
 	                }
@@ -128,6 +130,7 @@ public class GameMenuDemo extends Application {
 	            		{
 	            			Game_State.getState().Move(0, -1);
 	                		mazePane.updateMaze();
+	                		Observer.getObserver().updateObservers();
 	            		}
 	            		
 	                }
@@ -140,6 +143,7 @@ public class GameMenuDemo extends Application {
 	            		{
 	            			Game_State.getState().Move(0, 1);
 	                		mazePane.updateMaze();
+	                		Observer.getObserver().updateObservers();
 	            		}
 	                }
 	            	lastPressed='d';
@@ -154,6 +158,7 @@ public class GameMenuDemo extends Application {
 	            		{
 	            			Game_State.getState().HitSpaceBar(lastPressed);
 	                		mazePane.updateMaze();
+	                		Observer.getObserver().updateObservers();
 	            		}
 	                }
 	            }

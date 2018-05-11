@@ -17,7 +17,7 @@ public class Tilee  extends Rectangle{
         setWidth(30);
         setHeight(31);
 
-        relocate(x *20, y * 20);
+        relocate(x *25, y * 25);
     	InputStream is;
         if(c.getType()=="Stone")
             setFill(Color.BLACK);
