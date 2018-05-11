@@ -96,8 +96,27 @@ System.out.println("eroor in image");
         		
         }}
             // setFill( Color.SEASHELL);
-        else  if(c.getType()=="ArmorGift")
-             setFill( Color.RED);
+        else  if(c.getType()=="ArmorGift") {
+        	
+        	
+        	
+        	
+        	try {
+				is = Files.newInputStream(Paths.get("sprites/images (1).jpeg"));
+				Image img = new Image(is);
+		        setFill(new ImagePattern(img));
+	        	
+			} catch (IOException e) {
+System.out.println("eroor in image");
+				e.printStackTrace();
+    		
+    		
+    }
+        	
+        	
+        	
+        }
+             //setFill( Color.RED);
         else if(c.getType()=="SmallBomb") {
         	
         	

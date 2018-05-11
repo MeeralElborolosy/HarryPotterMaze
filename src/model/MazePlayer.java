@@ -36,10 +36,14 @@ public class MazePlayer implements Cell{
 	}
 	public void decreaseHealth(int val)
 	{
-		if(armor>0)
-			player.health-=armor;
+		if(armor>val)
+			player.armor-=val;
 		else
-			player.health-=val;
+		{
+			int temp=val;
+			player.armor=0;
+			player.health-=(val-temp);
+		}
 		if(health<=0)
 		{
 			xPos=checkPoints.getLastCheckPoint().getX();
