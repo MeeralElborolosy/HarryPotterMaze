@@ -5,6 +5,7 @@ import javazoom.jl.player.Player;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Timer;
 
 import control.MazeParser;
 import javafx.animation.FadeTransition;
@@ -172,6 +173,8 @@ public class GameMenuDemo extends Application {
 			CellFactory factory = new CellFactory();
 			Maze.getMaze().setMatrix(factory.createCells(parser.ParseMatrix()));
 			Maze.getMaze().PrintMatrix();
+			Timer t=new Timer(true);
+			t.scheduleAtFixedRate(Voldemort.getYouKnowWho(),(long)1000,(long)1000);
 			new Thread() {
 			public void run() {
 				try(FileInputStream f=new FileInputStream("Harry Potter Theme Song (1).mp3"))

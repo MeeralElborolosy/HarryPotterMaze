@@ -7,6 +7,7 @@ import model.EmptyTile;
 import model.Maze;
 import model.MazePlayer;
 import model.Tilee;
+import model.Voldemort;
 
 public class MazePane extends Pane{
 	public static final int TILE_SIZE = 20;
@@ -39,10 +40,17 @@ public class MazePane extends Pane{
 	{
 	    for (int y = 0; y < HEIGHT; y++) {
 	        for (int x = 0; x < WIDTH; x++) {
+	        	System.out.println(y);
 	            Tilee tile = new Tilee(Maze.getMaze().getMatrix()[y][x], x, y);
 	            board[x][y] = tile;
 	            this.getChildren().add(tile);    
 	        }
+	    }
+	    if(MazePlayer.getPlayer().getxPos()==Voldemort.getYouKnowWho().getXpos()
+	    		&&MazePlayer.getPlayer().getyPos()==Voldemort.getYouKnowWho().getYpos())
+	    {
+	    	System.out.println("HIIT");
+	    	MazePlayer.getPlayer().decreaseHealth(30);
 	    }
 	}
 }

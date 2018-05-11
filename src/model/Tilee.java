@@ -19,7 +19,21 @@ public class Tilee  extends Rectangle{
 
         relocate(x *25, y * 25);
     	InputStream is;
-        if(c.getType()=="Stone")
+    	if(x==Voldemort.getYouKnowWho().x&&y==Voldemort.getYouKnowWho().y)
+    	{
+    		try {
+				is = Files.newInputStream(Paths.get("sprites/monster.jpg"));
+				Image img = new Image(is);
+		        setFill(new ImagePattern(img));
+	        	
+			} catch (IOException e) {
+				System.out.println("eroor in image");
+				e.printStackTrace();
+    		
+    		
+    }
+    	}
+    	else if(c.getType()=="Stone")
             setFill(Color.BLACK);
         else if(c.getType()=="EmptyTile") {
         	if(x==30&&y==28) {

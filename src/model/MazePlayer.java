@@ -167,5 +167,9 @@ public class MazePlayer implements Cell{
 	public void setType(String type) {
 		this.type=type;
 	}
+	public void DrawPlayer()
+	{
+		
+	}
 	
 }
