@@ -43,7 +43,7 @@ public class MainMenu extends Parent{
 	   });
 	   menu3.getChildren().addAll(btnContinue, btnNewgame,btnExit);
 	 
-	   Rectangle bg = new Rectangle(800, 600);
+	   Rectangle bg = new Rectangle(31*25, 32*25);
 	   bg.setFill(Color.GREY);
 	   bg.setOpacity(0);
 	

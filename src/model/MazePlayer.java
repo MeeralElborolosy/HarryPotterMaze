@@ -17,6 +17,8 @@ public class MazePlayer implements Cell{
 	int yPos;
 	int lastX;
 	int lastY;
+	int Cx;
+	int Cy;
 	CheckPoints checkPoints;
 	private MazePlayer()
 	{
@@ -28,7 +30,18 @@ public class MazePlayer implements Cell{
 		yPos=1;
 		lastX=0;
 		lastY=1;
+		Cx=0;
+		Cy=1;
 		checkPoints=new CheckPoints(new Memento(xPos,yPos));
+	}
+	public void loadPlayer(int health,int bullets,int armor,int Cx, int Cy)
+	{
+		this.health=health;
+		this.bullets=bullets;
+		this.armor=armor;
+		this.xPos=Cx;
+		this.yPos=Cy;
+		checkPoints.saveCheckPoint(new Memento(Cx,Cy));
 	}
 	public static MazePlayer getPlayer()
 	{
@@ -50,6 +63,8 @@ public class MazePlayer implements Cell{
 			Memento lastPos=checkPoints.getLastCheckPoint();
 			xPos=lastPos.getX();
 			yPos=lastPos.getY();
+			Cx=lastPos.getX();
+			Cy=lastPos.getY();
 			((MazePane) GameMenuDemo.root.getChildren().get(3)).reDraw();
 			this.health=20;
 			System.out.println("no health");
@@ -68,6 +83,15 @@ public class MazePlayer implements Cell{
 			bullets--;
 			Maze.getMatrix()[y][x]=new EmptyTile();
 		}
+	}
+	public boolean fireBullets()
+	{
+		if(bullets>0)
+		{
+			bullets--;
+			return true;
+		}
+		return false;
 	}
 	public void extraBullets()
 	{
@@ -136,8 +160,15 @@ public class MazePlayer implements Cell{
 			else
 				this.addArmor();
 		}
-		else if(xPos==Voldemort.getYouKnowWho().getXpos()&&yPos==Voldemort.getYouKnowWho().getYpos())
+		else if(xPos==Voldemort.getYouKnowWho().getXpos()&&yPos==Voldemort.getYouKnowWho().getYpos()&&Voldemort.getYouKnowWho().life>0)
 			this.decreaseHealth(30);
+		else if(xPos==Dementor.getSoulEater().getXpos()&&yPos==Dementor.getSoulEater().getYpos()&&!Dementor.getSoulEater().hit)
+		{
+			if(bullets>0)
+				bullets--;
+			else
+				decreaseHealth(10);
+		}
 		if(Memento.inCheckPoint())
 			checkPoints.saveCheckPoint(new Memento(xPos,yPos));
 		System.out.println(xPos+" "+yPos);
@@ -170,6 +201,14 @@ public class MazePlayer implements Cell{
 	@Override
 	public void setType(String type) {
 		this.type=type;
+	}
+	public int getLastCx()
+	{
+		return Cx;
+	}
+	public int getLastCy()
+	{
+		return Cy;
 	}
 	public void DrawPlayer()
 	{

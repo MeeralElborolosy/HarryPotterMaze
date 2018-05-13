@@ -97,7 +97,7 @@ public class GameMenu extends Parent {
         menu0.getChildren().addAll(btnResume, btnOptions, btnExit);
         
 
-        Rectangle bg = new Rectangle(620, 620);
+        Rectangle bg = new Rectangle(31*25, 32*25);
         bg.setFill(Color.GREY);
         bg.setOpacity(0.4);
 

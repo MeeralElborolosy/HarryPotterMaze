@@ -2,9 +2,11 @@ package control;
 
 import java.util.ArrayList;
 
+import view.MazePane;
+
 public class CheckPoints {
 	Memento checkPoint;
-	int counter = 0;
+	static int counter = 0;
 	public CheckPoints(Memento checkPoint)
 	{
 		this.checkPoint=checkPoint;
@@ -14,7 +16,6 @@ public class CheckPoints {
 		if(this.checkPoint.getX()!=newM.getX()||this.checkPoint.getY()!=newM.getY())
 		{
 			this.checkPoint=newM;
-			counter=0;
 		}
 	}
 	public Memento getLastCheckPoint()
@@ -23,9 +24,19 @@ public class CheckPoints {
 		{
 			System.out.println(counter);
 			counter++;
+			MazePane.lives.setText("Lives: "+(5-counter));
 			return checkPoint;
 		}
 		Game_State.setState(new Loser());
 		return new Memento(0,1);
+	}
+	public static int getLives()
+	{
+		return counter;
+	}
+	public static void setLives(int c)
+	{
+		counter=c;
+		MazePane.lives.setText("Lives: "+(5-counter));
 	}
 }

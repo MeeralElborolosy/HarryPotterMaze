@@ -20,7 +20,11 @@ public class Voldemort extends TimerTask{
 	}
 	public void hitYouKnowWho()
 	{
-		life--;
+		if(life>0)
+		{
+			if(MazePlayer.getPlayer().fireBullets())
+				life--;
+		}
 	}
 	public int getYouKnowWhoLife()
 	{
@@ -42,5 +46,9 @@ public class Voldemort extends TimerTask{
 	public int getYpos()
 	{
 		return y;
+	}
+	public void LoadVoldemort(int life)
+	{
+		this.life=life;
 	}
 }

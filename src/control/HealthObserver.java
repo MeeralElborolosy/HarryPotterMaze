@@ -1,6 +1,7 @@
 package control;
 
 import model.MazePlayer;
+import view.MazePane;
 
 public class HealthObserver extends Observers{
 
@@ -12,6 +13,7 @@ public class HealthObserver extends Observers{
 	public void update() {
 		// TODO Auto-generated method stub
 		System.out.println("Health= "+MazePlayer.getPlayer().getHealth());
+		MazePane.armorRectangle();
 	}
 	public static HealthObserver getHealthObserver()
 	{

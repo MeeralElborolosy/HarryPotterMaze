@@ -6,7 +6,10 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
+import model.Dementor;
 import model.Maze;
+import model.MazePlayer;
+import model.Voldemort;
 
 public class MazeParser {
 	public char[][] ParseMatrix()
@@ -40,9 +43,24 @@ public class MazeParser {
 			BufferedReader bf = new BufferedReader(f);
 			int i=0;
 			while((line = bf.readLine()) != null) {
+				if(i<30) {
                 cells[i]=line.toCharArray();
                 i++;
-            }   
+				}
+				else
+					break;
+            }
+			int health,bullets,armor;
+			String data[]=line.split(" ");
+			health=Integer.parseInt(data[0]);
+			bullets=Integer.parseInt(data[1]);
+			armor=Integer.parseInt(data[2]);
+			CheckPoints.setLives(Integer.parseInt(data[3]));
+			System.out.println(armor);
+			MazePlayer.getPlayer().loadPlayer(health,bullets,armor,Integer.parseInt(data[4]),Integer.parseInt(data[5]));
+			Voldemort.getYouKnowWho().LoadVoldemort(Integer.parseInt(data[6]));
+			Dementor.getSoulEater().LoadDementor(Integer.parseInt(data[7]));
+			Observer.getObserver().updateObservers();
             // Always close files.
             bf.close();
             f.close();
@@ -85,6 +103,8 @@ public class MazeParser {
 				}
 				writer.println("");
 			}
+			writer.println(MazePlayer.getPlayer().getHealth()+" "+MazePlayer.getPlayer().getArmor()+" "+MazePlayer.getPlayer().getBullets()+" "+CheckPoints.getLives()+
+					" "+MazePlayer.getPlayer().getLastCx()+" "+MazePlayer.getPlayer().getLastCy()+" "+Voldemort.getYouKnowWho().getYouKnowWhoLife()+" "+Dementor.getSoulEater().getSoulEaterLife());
 			writer.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

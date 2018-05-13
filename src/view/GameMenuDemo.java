@@ -49,9 +49,9 @@ public class GameMenuDemo extends Application {
 	    @Override
 	    public void start(Stage primaryStage) throws Exception {
      
-	        root.setPrefSize(620, 640);
+	        root.setPrefSize(31*25, 32*25);
 
-	        InputStream is = Files.newInputStream(Paths.get("homePage.jpeg"));
+	        InputStream is = Files.newInputStream(Paths.get("homePage.PNG"));
 	        Image img = new Image(is);
 	        is.close();
 	        MazeParser parser = new MazeParser();
@@ -60,8 +60,8 @@ public class GameMenuDemo extends Application {
 			//Maze.getMaze().PrintMatrix();
 			
 	        ImageView imgView = new ImageView(img);
-	        imgView.setFitWidth(620);
-	        imgView.setFitHeight(620);
+	        imgView.setFitWidth(31*25);
+	        imgView.setFitHeight(32*25);
 
 	        gameMenu = new GameMenu();
 	        gameMenu.setVisible(false);
@@ -166,6 +166,13 @@ public class GameMenuDemo extends Application {
 	                		mazePane.updateMaze();
 	                		Observer.getObserver().updateObservers();
 	            		}
+	            		else
+	            		{
+	            			if(MazePlayer.getPlayer().getyPos()==Voldemort.getYouKnowWho().getYpos())
+	            				Voldemort.getYouKnowWho().hitYouKnowWho();
+	            			else if(MazePlayer.getPlayer().getxPos()==Dementor.getSoulEater().getXpos())
+	            				Dementor.getSoulEater().hitSoulEater();
+	            		}
 	                }
 	            }
 	            if(Game_State.getState().equals("Loser"))
@@ -182,9 +189,7 @@ public class GameMenuDemo extends Application {
 			CellFactory factory = new CellFactory();
 			Maze.getMaze().setMatrix(factory.createCells(parser.ParseMatrix()));
 			Maze.getMaze().PrintMatrix();
-			Timer t=new Timer(true);
 			playing=true;
-			t.scheduleAtFixedRate(Voldemort.getYouKnowWho(),(long)2000,(long)2000);
 			new Thread() {
 			public void run() {
 				try(FileInputStream f=new FileInputStream("Harry Potter Theme Song (1).mp3"))

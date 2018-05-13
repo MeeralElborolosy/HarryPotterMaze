@@ -19,12 +19,27 @@ public class Tilee  extends Rectangle{
 
         relocate(x *25, y * 25);
     	InputStream is;
-    	if(x==Voldemort.getYouKnowWho().x&&y==Voldemort.getYouKnowWho().y)
+    	if(x==Voldemort.getYouKnowWho().x&&y==Voldemort.getYouKnowWho().y&&Voldemort.getYouKnowWho().getYouKnowWhoLife()>0)
     	{
     		try {
-				is = Files.newInputStream(Paths.get("sprites/monster.jpg"));
+				is = Files.newInputStream(Paths.get("sprites/monster2.jpg"));
 				Image img = new Image(is);
 		        setFill(new ImagePattern(img));
+	        	
+			} catch (IOException e) {
+				System.out.println("eroor in image");
+				e.printStackTrace();
+    		
+    		
+    }
+    	}
+    	else if(x==Dementor.getSoulEater().x&&y==Dementor.getSoulEater().y&&!Dementor.getSoulEater().hit)
+    	{
+    		try {
+				is = Files.newInputStream(Paths.get("sprites/monster1.png"));
+				Image img = new Image(is);
+		        setFill(new ImagePattern(img));
+		        System.out.println("rasamt");
 	        	
 			} catch (IOException e) {
 				System.out.println("eroor in image");
@@ -61,15 +76,10 @@ public class Tilee  extends Rectangle{
              setFill(Color.DARKGREEN);
         else if(c.getType()=="Player")  {
        	//InputStream is;
-			try {
-				is = Files.newInputStream(Paths.get("sprites/Screen Shot 2018-05-09 at 4.42.52 PM.jpg"));
-				Image img = new Image(is);
-		        setFill(new ImagePattern(img));
-	        	
-			} catch (IOException e) {
-System.out.println("eroor in image");
-				e.printStackTrace();
-			}
+        	if(MazePlayer.getPlayer().getArmor()>0)
+        		DrawArmor();
+        	else
+        		DrawPlayer();
 	      //  Image img = new Image(is);
 	        //setFill(new ImagePattern(img));
         	
@@ -168,6 +178,33 @@ System.out.println("eroor in image");
     }
         }
             // setFill( Color.BLUEVIOLET);
+    }
+    void DrawPlayer()
+    {
+    	InputStream is;
+    	try {
+			is = Files.newInputStream(Paths.get("sprites/Screen Shot 2018-05-12 at 10.43.28 PM.png"));
+			Image img = new Image(is);
+	        setFill(new ImagePattern(img));
+        	
+		} catch (IOException e) {
+System.out.println("eroor in image");
+			e.printStackTrace();
+		}
+    }
+    void DrawArmor()
+    {
+    	DrawPlayer();
+    	InputStream is;
+    	try {
+			is = Files.newInputStream(Paths.get("sprites/Screen Shot 2018-05-09 at 4.42.52 PM.jpg"));
+			Image img = new Image(is);
+	        setFill(new ImagePattern(img));
+        	
+		} catch (IOException e) {
+System.out.println("eroor in image");
+			e.printStackTrace();
+		}
     }
 }
 
