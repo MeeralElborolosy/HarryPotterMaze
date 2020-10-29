@@ -3,12 +3,15 @@ package view;
 import control.Game_State;
 import control.InGame;
 import control.MazeParser;
+import control.Observer;
+import control.TimeUpdate;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import model.CellFactory;
 import model.Maze;
+import model.MazePlayer;
 import model.Tilee;
 
 public class MainMenu extends Parent{
@@ -30,13 +33,16 @@ public class MainMenu extends Parent{
 			CellFactory factory = new CellFactory();
 			Maze.getMaze().setMatrix(factory.createCells(parser.ParseMatrix()));
 		   GameMenuDemo.root.getChildren().get(3).setVisible(true);
+		   ((MazePane) GameMenuDemo.root.getChildren().get(3)).reDraw();
 		   Game_State.setState(new InGame());
+		   TimeUpdate.getTime().reset();
+		   MazePlayer.getPlayer().reset();
+		   Observer.getObserver().updateObservers();
 	   });
 	   btnContinue.setOnMouseClicked(event -> {
 		   MazeParser parser = new MazeParser();
 			CellFactory factory = new CellFactory();
 			Maze.getMaze().setMatrix(factory.createCells(parser.LoadMatrix()));
-			Maze.getMaze().PrintMatrix();
 		   ((MazePane) GameMenuDemo.root.getChildren().get(3)).reDraw();
 		   GameMenuDemo.root.getChildren().get(3).setVisible(true);
 		   Game_State.setState(new InGame());

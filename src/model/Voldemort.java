@@ -5,7 +5,7 @@ import java.util.TimerTask;
 import view.GameMenuDemo;
 import view.MazePane;
 
-public class Voldemort extends TimerTask{
+public class Voldemort {
 	static Voldemort voldemort=new Voldemort();
 	int life;
 	int x=21;
@@ -30,7 +30,6 @@ public class Voldemort extends TimerTask{
 	{
 		return life;
 	}
-	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		if(x<29)

@@ -5,7 +5,7 @@ import java.util.TimerTask;
 import view.GameMenuDemo;
 import view.MazePane;
 
-public class Dementor extends TimerTask{
+public class Dementor{
 	static Dementor dementor=new Dementor();
 	int x=11;
 	int y=18;
@@ -22,7 +22,6 @@ public class Dementor extends TimerTask{
 	{
 		hit=MazePlayer.getPlayer().fireBullets();
 	}
-	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		if(y<22)

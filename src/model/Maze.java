@@ -2,7 +2,7 @@ package model;
 
 public class Maze {
 	private static Maze maze=new Maze();
-	private static Cell[][] matrix;
+	private Cell[][] matrix;
 	private Maze()
 	{
 		matrix=new Cell[30][31];
@@ -18,7 +18,7 @@ public class Maze {
 				matrix[i][j]=newMatrix[i][j];
 	}
 	
-	public static Cell[][] getMatrix()
+	public Cell[][] getMatrix()
 	{
 		return  matrix; 
 	}

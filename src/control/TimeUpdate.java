@@ -6,17 +6,44 @@ import model.MazePlayer;
 import view.MazePane;
 
 public class TimeUpdate extends TimerTask{
-	static TimeUpdate time;
-	int seconds=0;
+	static TimeUpdate timeUpdate=new TimeUpdate();
+	long start;
+	static long end;
+	long loadedTime;
+	private TimeUpdate()
+	{
+		super();
+		start=System.nanoTime();
+		loadedTime=0;
+	}
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		seconds++;
-		MazePane.timer.setText("Time: "+seconds);
+		end=System.nanoTime()-start;
+		//MazeParser p=new MazeParser();
+		//p.SaveMatrix();
 	}
-	public static TimeUpdate getTimer()
+	public long getTimer()
 	{
-		return time;
+		System.out.println("Time:"+(end+loadedTime)/1000000000);
+		return (end+loadedTime);
 	}
-	
+	public static TimeUpdate getTime()
+	{
+		return timeUpdate;
+	}
+	public void LoadTime(long time)
+	{
+		this.loadedTime=time;
+		System.out.println("loaded:"+loadedTime);
+		System.out.println("Time:"+(end+loadedTime)/1000000000);
+	}
+	public long SaveTime()
+	{
+		return end+loadedTime;
+	}
+	public void reset()
+	{
+		start=System.nanoTime();
+	}
 }

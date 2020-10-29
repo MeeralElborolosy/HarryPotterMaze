@@ -34,6 +34,10 @@ public class CheckPoints {
 	{
 		return counter;
 	}
+	public static void reset()
+	{
+		counter=0;
+	}
 	public static void setLives(int c)
 	{
 		counter=c;

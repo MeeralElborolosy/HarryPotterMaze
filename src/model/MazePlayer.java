@@ -19,6 +19,7 @@ public class MazePlayer implements Cell{
 	int lastY;
 	int Cx;
 	int Cy;
+	int moves;
 	CheckPoints checkPoints;
 	private MazePlayer()
 	{
@@ -32,15 +33,34 @@ public class MazePlayer implements Cell{
 		lastY=1;
 		Cx=0;
 		Cy=1;
+		moves=200;
 		checkPoints=new CheckPoints(new Memento(xPos,yPos));
 	}
-	public void loadPlayer(int health,int bullets,int armor,int Cx, int Cy)
+	public void reset()
+	{
+		setType("Player");
+		health=100;
+		bullets=6;
+		armor=0;
+		xPos=0;
+		yPos=1;
+		lastX=0;
+		lastY=1;
+		Cx=0;
+		Cy=1;
+		moves=200;
+		checkPoints=new CheckPoints(new Memento(xPos,yPos));
+	}
+	public void loadPlayer(int health,int bullets,int armor,int Cx, int Cy,int moves)
 	{
 		this.health=health;
 		this.bullets=bullets;
 		this.armor=armor;
 		this.xPos=Cx;
 		this.yPos=Cy;
+		this.lastX=xPos;
+		this.lastY=yPos;
+		this.moves=moves;
 		checkPoints.saveCheckPoint(new Memento(Cx,Cy));
 	}
 	public static MazePlayer getPlayer()
@@ -59,7 +79,7 @@ public class MazePlayer implements Cell{
 		}
 		if(health<=0)
 		{
-			Maze.getMatrix()[yPos][xPos]=new EmptyTile();
+			Maze.getMaze().getMatrix()[yPos][xPos]=new EmptyTile();
 			Memento lastPos=checkPoints.getLastCheckPoint();
 			xPos=lastPos.getX();
 			yPos=lastPos.getY();
@@ -81,7 +101,7 @@ public class MazePlayer implements Cell{
 		if(bullets>0)
 		{
 			bullets--;
-			Maze.getMatrix()[y][x]=new EmptyTile();
+			Maze.getMaze().getMatrix()[y][x]=new EmptyTile();
 		}
 	}
 	public boolean fireBullets()
@@ -123,37 +143,48 @@ public class MazePlayer implements Cell{
 		if(x>0)
 		{
 			if(xPos<30)
+			{
 				xPos+=x;
+				moves--;
+			}
 		}
 		else if(x<0)
 		{
 			if(xPos>0)
+			{
 				xPos+=x;
+				moves--;
+			}
 		}
 		if(y>0)
 		{ 
 			if(yPos<28)
+			{
 				yPos+=y;
+				moves--;
+			}
 		}
 		else if(y<0)
 		{
 			if(yPos>1)
+			{
 				yPos+=y;
+				moves--;
+			}
 		}
 		if(xPos==30&&yPos==28)
 		{
-			System.out.println("kasabty");
 			Game_State.getState().setState(new Winner());
 		}
-		else if(Maze.getMatrix()[yPos][xPos].getType().equals("BulletsGift"))
+		else if(Maze.getMaze().getMatrix()[yPos][xPos].getType().equals("BulletsGift"))
 			this.extraBullets();
-		else if(Maze.getMatrix()[yPos][xPos].getType().equals("SmallBomb"))
+		else if(Maze.getMaze().getMatrix()[yPos][xPos].getType().equals("SmallBomb"))
 			this.decreaseHealth(10);
-		else if(Maze.getMatrix()[yPos][xPos].getType().equals("BigBomb"))
+		else if(Maze.getMaze().getMatrix()[yPos][xPos].getType().equals("BigBomb"))
 			this.decreaseHealth(20);
-		else if(Maze.getMatrix()[yPos][xPos].getType().equals("HealthGift"))
+		else if(Maze.getMaze().getMatrix()[yPos][xPos].getType().equals("HealthGift"))
 			this.increaseHealth();
-		else if(Maze.getMatrix()[yPos][xPos].getType().equals("ArmorGift"))
+		else if(Maze.getMaze().getMatrix()[yPos][xPos].getType().equals("ArmorGift"))
 		{
 			if(this.getArmor()>0)
 				this.extraArmor();
@@ -171,7 +202,6 @@ public class MazePlayer implements Cell{
 		}
 		if(Memento.inCheckPoint())
 			checkPoints.saveCheckPoint(new Memento(xPos,yPos));
-		System.out.println(xPos+" "+yPos);
 	}
 	public int getLastX() {
 		return lastX;
@@ -209,6 +239,19 @@ public class MazePlayer implements Cell{
 	public int getLastCy()
 	{
 		return Cy;
+	}
+	public int getMoves()
+	{
+		return moves;
+	}
+	public int calculateScore()
+	{
+		int kills=0;
+		if(Voldemort.getYouKnowWho().life<=0)
+			kills+=30;
+		if(Dementor.getSoulEater().hit)
+			kills+=20;
+		return moves+health*2+bullets*5+armor*2+kills;
 	}
 	public void DrawPlayer()
 	{

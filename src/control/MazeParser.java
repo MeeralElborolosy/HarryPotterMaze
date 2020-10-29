@@ -17,7 +17,7 @@ public class MazeParser {
 		String line=null;
 		char[][] cells=new char[30][31];
 		try{
-			FileReader f = new FileReader("Maze.txt");
+			FileReader f = new FileReader("sprites/Maze.txt");
 			BufferedReader bf = new BufferedReader(f);
 			int i=0;
 			while((line = bf.readLine()) != null) {
@@ -39,7 +39,7 @@ public class MazeParser {
 		String line=null;
 		char[][] cells=new char[30][31];
 		try{
-			FileReader f = new FileReader("savedMaze.txt");
+			FileReader f = new FileReader("sprites/savedMaze.txt");
 			BufferedReader bf = new BufferedReader(f);
 			int i=0;
 			while((line = bf.readLine()) != null) {
@@ -53,13 +53,14 @@ public class MazeParser {
 			int health,bullets,armor;
 			String data[]=line.split(" ");
 			health=Integer.parseInt(data[0]);
-			bullets=Integer.parseInt(data[1]);
-			armor=Integer.parseInt(data[2]);
+			armor=Integer.parseInt(data[1]);
+			bullets=Integer.parseInt(data[2]);
 			CheckPoints.setLives(Integer.parseInt(data[3]));
-			System.out.println(armor);
-			MazePlayer.getPlayer().loadPlayer(health,bullets,armor,Integer.parseInt(data[4]),Integer.parseInt(data[5]));
+			MazePlayer.getPlayer().loadPlayer(health,bullets,armor,Integer.parseInt(data[4]),Integer.parseInt(data[5]),Integer.parseInt(data[9]));
+			TimeUpdate.getTime().LoadTime(Long.parseLong(data[8]));
 			Voldemort.getYouKnowWho().LoadVoldemort(Integer.parseInt(data[6]));
 			Dementor.getSoulEater().LoadDementor(Integer.parseInt(data[7]));
+			
 			Observer.getObserver().updateObservers();
             // Always close files.
             bf.close();
@@ -74,7 +75,7 @@ public class MazeParser {
 	public void SaveMatrix()
 	{
 		try {
-			PrintWriter writer = new PrintWriter("savedMaze.txt", "UTF-8");
+			PrintWriter writer = new PrintWriter("sprites/savedMaze.txt", "UTF-8");
 			for(int i=0;i<30;i++)
 			{
 				for(int j=0;j<31;j++)
@@ -104,7 +105,8 @@ public class MazeParser {
 				writer.println("");
 			}
 			writer.println(MazePlayer.getPlayer().getHealth()+" "+MazePlayer.getPlayer().getArmor()+" "+MazePlayer.getPlayer().getBullets()+" "+CheckPoints.getLives()+
-					" "+MazePlayer.getPlayer().getLastCx()+" "+MazePlayer.getPlayer().getLastCy()+" "+Voldemort.getYouKnowWho().getYouKnowWhoLife()+" "+Dementor.getSoulEater().getSoulEaterLife());
+					" "+MazePlayer.getPlayer().getLastCx()+" "+MazePlayer.getPlayer().getLastCy()+" "+Voldemort.getYouKnowWho().getYouKnowWhoLife()+" "+Dementor.getSoulEater().getSoulEaterLife()
+					+" "+((TimeUpdate.getTime().getTimer()))+" "+MazePlayer.getPlayer().getMoves());
 			writer.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
